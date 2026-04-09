@@ -9,7 +9,24 @@ from pathlib import Path
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 SRC_DIR = Path(__file__).resolve().parent.parent
 TRAINING_DIR = str(SRC_DIR / "training")
-DATA_DIR = str(SRC_DIR / "data")
+DATA_DIR = str(SRC_DIR.parent / "data")
+
+# generate data if it doesn't exist yet
+EXPECTED_DATA = [
+    DATA_DIR + "/lorenz_raw.csv",
+    DATA_DIR + "/lorenz_windows_w1.csv",
+    DATA_DIR + "/lorenz_windows_w10.csv",
+]
+if not all(os.path.exists(f) for f in EXPECTED_DATA):
+    print("=== DATA NOT FOUND — generating Lorenz datasets ===", flush=True)
+    rc = subprocess.call(
+        [sys.executable, os.path.join(str(SRC_DIR / "data"), "generate_lorenz.py")],
+        cwd=str(SRC_DIR / "data"),
+    )
+    if rc != 0:
+        print(f"=== Data generation FAILED (exit {rc}), aborting ===", flush=True)
+        sys.exit(1)
+    print("=== Data generation: OK ===\n", flush=True)
 
 # order doesn't really matter, but FFNNs are fastest so they go first
 SCRIPTS = [

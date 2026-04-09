@@ -26,7 +26,8 @@ for the thesis figures. Everything in `docs/figures/` is auto-generated py the s
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate thesis
 ```
 
 Generate data and train everything:
@@ -70,4 +71,4 @@ early stopping with patience=20).
 ## Requirements
 
 Python 3.10, TensorFlow 2.10, scikit-learn, keras-tuner, dysts, matplotlib,
-joblib. See `requirements.txt`.
+joblib. See `environment.yml`.
