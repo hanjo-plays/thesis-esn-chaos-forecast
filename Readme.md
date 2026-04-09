@@ -76,5 +76,5 @@ early stopping with patience=20).
 
 ## Requirements
 
-Python 3.10, TensorFlow 2.10, scikit-learn, keras-tuner, dysts, matplotlib,
+Python 3.10, TensorFlow 2.15, scikit-learn, keras-tuner, dysts, matplotlib,
 joblib. See `environment.yml` (conda) or `requirements.txt` (pip).
